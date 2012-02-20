@@ -1,4 +1,4 @@
-# jquery.conditionalDom.js
+# jquery.conditionaldom.js
 
 ConditionalDom is a jQuery plugin that makes it easy to conditionally execute simple actions on DOM elements based on Javascript conditions.
 
@@ -59,7 +59,7 @@ You can also have more complex if/unless statements
       Welcome, Mrs. Admin!
     </div>
 
-By default, conditionalDom will only execute the if/unless statements once, regardless of how many times the <code>conditionalDom()</code> function is called. However, if you want to execute the conditional statement to be executed multiple times, add the *multi* class to the DOM element. Such as:
+By default, ConditionalDom will only run the if/unless statements once, regardless of how many times the <code>conditionalDom()</code> function is called. However, if you want to execute the conditional statement to be executed multiple times, add the *multi* class to the DOM element. Such as:
 
     <div class="conditionalDom multi" data-if="true">
     </div>
@@ -95,6 +95,6 @@ Pull requests are welcome and appreciated. Please make changes to the CoffeeScri
 
 ## Compiling CoffeeScript
 
-    coffee -c source/jquery.conditionalDom.coffee
+    coffee -c source/jquery.conditionaldom.coffee
 
 #### Copyright 2012 Carl Mercier - Released under the MIT license.
