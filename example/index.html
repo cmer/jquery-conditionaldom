@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jquery.conditional.js demo</title>
+    <link href=" http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="../source/jquery.conditionalDom.js"></script>
+    <style>
+      body            { font-size: 16pt; }
+      div             { margin: 40px; }
+      .conditionalDom { display: none; }
+    </style>
+
+    <script>
+      window.Application = {}
+      Application.meta = {userId: 1, isMale: true, isAdmin: true};
+      $(document).ready( function() { $(document).conditionalDom(); });
+    </script>
+  </head>
+
+  <body>
+    <div class="conditionalDom" data-if="Application.meta.userId == 1">
+      This is displayed because userId is 1.
+    </div>
+
+    <div class="conditionalDom" data-if="Application.meta.isAdmin">
+      Welcome, admin!
+    </div>
+
+    <div class="conditionalDom" data-unless="Application.meta.isAdmin">
+      Welcome, mere mortal!
+    </div>
+
+    <div class="conditionalDom" data-if="Application.meta.isMale && Application.meta.isAdmin">
+      Welcome, Mr. Admin!
+    </div>
+
+    <div class="conditionalDom" data-if="!Application.meta.isMale && Application.meta.isAdmin">
+      Welcome, Mrs. Admin!
+    </div>
+
+    <div class="conditionalDom" data-if="Application.meta.isAdmin"
+                                data-true-action="$e.html('Welcome Admin! Your user id is ' + Application.meta.userId); $e.show();"
+                                data-false-action="alert('Access Denied!'); $e.hide();">
+    </div>
+
+    <div class="conditionalDom" data-if="true == false" data-false-action="$e.remove();">
+      This will be removed from the DOM.
+    </div>
+
+
+    <div class="conditionalDom multi" data-if="true == true" data-true-action="var date=new Date(); $e.html(date.toString()); $e.show();">
+    </div>
+
+    <div><button onclick="javascript:$(document).conditionalDom();">Run $(document).conditionalDom() again</button></div>
+  </body>
+</html>
