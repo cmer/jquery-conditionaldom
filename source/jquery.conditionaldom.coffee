@@ -6,8 +6,8 @@ For example, if the current user is an administrator, you might want to
 show a certain DIV, but hide it when the user is not an administrator.
 
 @name conditionaldom
-@version 0.1.0
-@date 02-20-2012
+@version 0.2.0
+@date 03-5-2012
 @requires jQuery v1.2.3+
 @author Carl Mercier
 @license MIT License - http://www.opensource.org/licenses/mit-license.php
@@ -24,8 +24,8 @@ Copyright (c) 2012, Carl Mercier (c -[at]- cmer [*dot*] me)
       $e = $(e)
       if $e.data("if") || $e.data("unless")
         code        = "(#{$e.data("if") || $e.data("unless")})"
-        trueAction  = $e.data("true-action")  || "$e.show();"
-        falseAction = $e.data("false-action") || "$e.hide();"
+        trueAction  = $e.data("true-action")  || "$e.replaceWith($e.html());"
+        falseAction = $e.data("false-action") || "$e.remove();"
 
         if $e.data("if")
           code = "if " + code
