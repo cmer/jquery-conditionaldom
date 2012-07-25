@@ -10,7 +10,7 @@ When the statement evaluates to `false`, the ConditionalDom element is completel
 
 This behavior can be changed. See the intermediate examples for details.
 
-ConditionalDom will also only evaluate the conditional statement only once per DOM element, unless the `multi` class is specified. See examples for details.
+ConditionalDom will also evaluate the conditional statement only once per DOM element, unless the `multi` class is specified. See examples for details.
 
 ## Examples
 
