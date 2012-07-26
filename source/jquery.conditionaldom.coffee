@@ -6,7 +6,7 @@ For example, if the current user is an administrator, you might want to
 show a certain DIV, but hide it when the user is not an administrator.
 
 @name conditionaldom
-@version 0.3.0
+@version 0.3.1
 @date 7/25/2012
 @requires jQuery v1.2.3+
 @author Carl Mercier
@@ -21,16 +21,23 @@ Copyright (c) 2012, Carl Mercier (c -[at]- cmer [*dot*] me)
 (($) ->
   $.fn.conditionalDom = (options = {}) ->
     options['selector'] ||= '.conditionalDom'
+    options['true_action'] ||= ($e) ->
+      # This is faster than .replaceWith()
+      $e.children().insertAfter($e);
+      $e.remove()
+    options['false_action'] ||= ($e) ->
+      $e.remove()
+
     this.find("#{options['selector']}:not(.executed), #{options['selector']}.multi").each (index, e) =>
       $e = $(e)
-      if $e.data("if") || $e.data("unless")
-        code        = "(#{$e.data("if") || $e.data("unless")})"
-        trueAction  = $e.data("true-action")  || options["true_action"] || "$e.replaceWith($e.html());"
-        falseAction = $e.data("false-action") || options["false_action"] || "$e.remove();"
+      if e.getAttribute("data-if") || e.getAttribute("data-unless")
+        code        = "(#{e.getAttribute("data-if") || e.getAttribute("data-unless")})"
+        trueAction  = e.getAttribute("data-true-action")  || options["true_action"]
+        falseAction = e.getAttribute("data-false-action") || options["false_action"]
 
-        if $e.data("if")
+        if e.getAttribute("data-if")
           code = "if " + code
-        else if $e.data("unless")
+        else if $e.getAttribute("data-unless")
           code = "if (!" + code + ")"
 
         code +=  "{ true } else { false }"
