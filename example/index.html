@@ -15,7 +15,23 @@
     <script>
       window.Application = {}
       Application.meta = {userId: 1, isMale: true, isAdmin: true};
-      $(document).ready( function() { $(document).conditionalDom(); });
+      $(document).ready(
+        function() {
+          // $(document).conditionalDom();
+          //
+          // Example with default true/false actions:
+          //
+          // $(document).conditionalDom({ true_action: function($e)  { $e.show(); },
+          //                              false_action: function($e) { $e.hide(); }
+          //                            });
+          //
+          //
+          // Example with a function passed as an option
+          $(document).conditionalDom({ ifUserIsAdmin: function() { Application.meta.isAdmin; },
+                                       replaceWithContent: function($e)  { $e.replaceWith($e.html()); },
+                                       true_action: 'options.replaceWithContent($e);' });
+        }
+      );
     </script>
   </head>
 
@@ -24,7 +40,8 @@
       This is displayed because userId is 1.
     </div>
 
-    <div class="conditionalDom" data-if="Application.meta.isAdmin">
+    <!-- calls a function passed as an option -->
+    <div class="conditionalDom" data-if="options.ifUserIsAdmin()">
       Welcome, admin!
     </div>
 

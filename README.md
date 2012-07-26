@@ -96,6 +96,27 @@ To hide an element from the DOM when the condition evaluates to `false`, just se
       This will be hidden from the DOM instead of removed.
     </div>
 
+You can specify a different selector for the ConditionalDom elements as such:
+    <script>
+      $(document).conditionalDom({selector: '.customSelector'}); // default is .conditionalDom
+    </script>
+
+You can specify default `true-action` and `false-action` as such (note the underscore):
+    <script>
+      $(document).conditionalDom( { true_action: function($e) { $e.show() },
+                                    false_action: function($e) { $e.hide() } });
+    </script>
+
+Ypou can also pass functions to ConditionalDom and call them from the `if`/`unless` conditions, or from the `true-action` or `false-action`.
+    <script>
+      $(document).conditionalDom({ ifUserIsAdmin: function() { Application.meta.isAdmin; },
+                                   replaceWithContent: function($e)  { $e.replaceWith($e.html()); },
+                                   true_action: 'options.replaceWithContent($e);' });
+    </script>
+
+    <div class="conditionalDom" data-if="options.ifUserIsAdmin()">
+      Welcome, admin!
+    </div>
 
 ## Pull Requests
 
