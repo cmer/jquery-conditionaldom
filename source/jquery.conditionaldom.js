@@ -46,7 +46,7 @@ Copyright (c) 2012, Carl Mercier (c -[at]- cmer [*dot*] me)
           falseAction = e.getAttribute("data-false-action") || options["false_action"];
           if (e.getAttribute("data-if")) {
             code = "if " + code;
-          } else if ($e.getAttribute("data-unless")) {
+          } else if (e.getAttribute("data-unless")) {
             code = "if (!" + code + ")";
           }
           code += "{ true } else { false }";
